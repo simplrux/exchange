@@ -1,0 +1,158 @@
+<ng-container *ngIf="store.cart$ | async as cart">
+  <div *ngIf="cart.shoppingList.length > 0" class="cart-wrap">
+    <div class="cart">
+      <span class="rect"></span>
+      <ul class="tabs">
+        <ng-container *ngFor="let tab of tabs; let i = index">
+          <li [class.active]="tab.active" *ngIf="!tabs[3].active && i !== 3">
+            {{tab.name}}
+          </li>
+          <li [class.active]="tab.active" *ngIf="tabs[3].active && i === 3">
+            {{tab.name}}
+          </li>
+          <li *ngIf="(i === 0 || i === 1) && !tabs[3].active">
+            <img src="../../../../assets/icons/arrow.svg">
+          </li>
+        </ng-container>
+      </ul>
+      <div *ngIf="tabs[0].active" class="shopping-list">
+        <div class="product" *ngFor="let s of cart.shoppingList">
+          <div class="details">
+            <p>
+              {{s.name}}
+            </p>
+            <p>
+              {{s.price}}
+            </p>
+            <p>
+              {{s.billing}}
+            </p>
+          </div>
+          <ul class="options">
+            <li>
+              <span class="right">
+                מנוי דוח יומי
+                <span>
+                  5 דוחות
+                </span>
+
+              </span>
+              <span class="left">
+                בחירת דוחות
+                <img src="../../../../assets/icons/arrow.svg">
+              </span>
+            </li>
+            <li>
+              <span class="right">
+                שירותי API
+                <span>{{cart.shoppingList[0].options[1].description}}</span>
+              </span>
+              <span class="left">
+                בחירת שירותים
+                <img src="../../../../assets/icons/arrow.svg">
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div *ngIf="tabs[1].active" class="user-details">
+        <form>
+          <fieldset>
+            <legend>פרטי משתמש</legend>
+            <div class="control">
+              <input placeholder="דואר אלקטרוני" type="text">
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>כתובת לחיוב</legend>
+            <div class="control">
+              <input placeholder="שם מלא / שם החברה" type="text">
+            </div>
+            <div class="control multi">
+              <input placeholder="רחוב" type="text">
+              <input placeholder="מספר" type="text">
+            </div>
+            <div class="control">
+              <input placeholder="עיר" type="text">
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+
+      <div *ngIf="tabs[2].active" class="payment-details">
+
+        <form>
+          <div class="card-header active">
+            <div class="right">
+              <label class="radio-container">כרטיס אשראי
+                <input [checked]="true" type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="left"></div>
+          </div>
+          <fieldset>
+            <legend>תשלום במערכת המאובטחת שלנו</legend>
+            <div class="control">
+              <input placeholder="מספר כרטיס" type="text">
+            </div>
+            <div class="control">
+              <input placeholder="שם בעל הכרטיס" type="text">
+            </div>
+            <div class="control multi">
+              <input placeholder="תוקף" type="text">
+              <input placeholder="3 ספרות בגב הכרטיס" type="text">
+            </div>
+          </fieldset>
+          <div class="card-header">
+            <div class="right">
+              <label class="radio-container">
+                  <img src="../../../../assets/icons/paypal.svg">
+                <input type="checkbox"  [checked]="false"  checked="checked">
+                <span class="checkmark"></span>
+              </label>
+
+            </div>
+            <div class="left"></div>
+          </div>
+          <div class="card-header">
+            <div class="right">
+              <label class="radio-container">
+                  <img src="../../../../assets/icons/applepay.svg">
+                <input type="checkbox"  [checked]="false"  checked="checked">
+                <span class="checkmark"></span>
+              </label>
+
+            </div>
+            <div class="left"></div>
+          </div>
+        </form>
+
+      </div>
+
+
+      <div class="sum">
+
+        <div class="premium" *ngIf="tabs[1].active">
+          <span>חבילת Premium</span>
+          <span>
+            {{cart.shoppingList[0].price}}
+          </span>
+        </div>
+
+        <div class="price">
+          <span>סיכום</span>
+          <span>
+            {{cart.shoppingList[0].price}}
+          </span>
+        </div>
+        <button [class.outline]="tabs[3].active" (click)="next()">
+          {{actionText}}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

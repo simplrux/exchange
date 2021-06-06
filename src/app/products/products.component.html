@@ -1,0 +1,14 @@
+<h1>
+  מה ברצונך לקנות?
+</h1>
+<div class="list">
+  <app-list *ngIf="store.productList$ | async as products" [products]="products"></app-list>
+</div>
+<div class="packages">
+  <app-package (packageSelected)="selectedPackage = $event; showOptions= true"
+    *ngFor="let package of store.packages$ | async" [package]="package"></app-package>
+</div>
+<div *ngIf="showOptions" class="product-select">
+  <div class="backdrop" (click)="showOptions = false"></div>
+  <app-options (optionsChanged)="selectPackage($event)" [package]="selectedPackage"></app-options>
+</div>

@@ -1,0 +1,33 @@
+  <div class="package" [class.premium]="package.name === 'חבילת Premium'">
+    <div class="details">
+      <p>
+        {{package.name}}
+      </p>
+      <p>
+        {{package.price}}
+      </p>
+      <p>
+        {{package.billing}}
+      </p>
+    </div>
+    <ul class="options">
+      <li [class.greyed]="!o.available" *ngFor="let o of package.options">
+
+        <span>
+          {{o.name}}
+          <span *ngIf="o.description">
+            {{o.description}}
+
+          </span>
+        </span>
+        <span>
+          i
+        </span>
+      </li>
+    </ul>
+    <div class="btn-wrap">
+      <button (click)="selectPackage(package)">
+        בחירת {{package.name}}
+      </button>
+    </div>
+  </div>

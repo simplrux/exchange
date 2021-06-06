@@ -1,0 +1,35 @@
+@import "colors.scss";
+
+.list-wrap {
+  display: flex;
+  justify-content: center;
+  ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    height: 48px;
+    display: flex;
+    align-items: stretch;
+    font-family: "Assistant", sans-serif;
+    font-size: 16px;
+    border: 1px solid #e6e6e6;
+
+    li {
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      cursor: pointer;
+    //   flex: 1;
+      &.active {
+        background-color: $darkblue;
+        font-weight: 700;
+        color: #fff;
+      }
+    }
+  }
+}

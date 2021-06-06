@@ -1,0 +1,44 @@
+<div class="options-wrap">
+  <div class="details">
+    <p>
+      {{package.name}}
+    </p>
+    <p>
+      {{package.price}}
+    </p>
+    <p>
+      {{package.billing}}
+    </p>
+  </div>
+  <div class="package-options">
+    <p>עבור חלק מהמוצרים בחבילה יש לבצע בחירה אישית</p>
+    <h1>אנא בחר והתאם את החבילה לצרכיך</h1>
+
+    <form>
+      <fieldset>
+        <div class="legend">
+          מנוי דוח BI יומי
+          <p>5 דוחות</p>
+        </div>
+      </fieldset>
+    </form>
+    <form [class.open]="showServices">
+      <fieldset>
+        <div class="legend" (click)="showServices = !showServices">
+          שירותי API
+          <p>{{services.length}} שירותים</p>
+        </div>
+        <div id="cb">
+          <label *ngFor="let s of services" class="cb-container">
+            {{s}}
+            <input [checked]="false" type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </fieldset>
+    </form>
+    <button (click)="selectPackage(package)" type="button">
+      הוספה לעגלה
+    </button>
+  </div>
+</div>
