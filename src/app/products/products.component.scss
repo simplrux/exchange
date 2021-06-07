@@ -13,6 +13,8 @@ h1 {
 .packages {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 .product-select {
   position: fixed;

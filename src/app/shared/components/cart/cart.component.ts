@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cart } from '../../models/models.model';
 import { StoreService } from '../../services/store/store.service';
 
@@ -10,6 +10,13 @@ import { StoreService } from '../../services/store/store.service';
 export class CartComponent implements OnInit {
 
   constructor(public store: StoreService) { }
+
+  @Output()
+  openLogin: EventEmitter<boolean> = new EventEmitter();
+
+  @Input()
+  logged = false;
+
   actionText = 'מעבר לקופה';
   tabs = [
     {
@@ -50,14 +57,22 @@ export class CartComponent implements OnInit {
     }
     if (currentIndex + 1 === 3) {
       this.actionText = 'בחזרה לחנות';
+      this.logged = false;
+      this.showLogin(false);
     }
     if (currentIndex + 1 === 4) {
       this.store.cart$.next(
-        { ...this.store.cart$.value, ...{
-          shoppingList: []
-        } }
+        {
+          ...this.store.cart$.value, ...{
+            shoppingList: []
+          }
+        }
       )
     }
+  }
+
+  showLogin(bool: boolean) {
+    this.openLogin.emit(bool);
   }
 
   gotTo(step: number) {

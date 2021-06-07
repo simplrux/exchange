@@ -1,4 +1,4 @@
-@import 'colors.scss';
+@import "colors.scss";
 ul {
   list-style: none;
   display: flex;
@@ -12,6 +12,10 @@ ul {
   color: #fff;
   font-size: 20px;
   font-weight: normal;
+  position: fixed;
+  z-index: 1;
+  top:0;
+  left:0;
   li {
     cursor: pointer;
     display: flex;
@@ -71,7 +75,8 @@ ul {
 
 .header {
   width: 100%;
-//   position: relative;
+  //   position: relative;
+  padding-top: 85px;
   .content {
     // position: absolute;
     left: 0;
@@ -81,7 +86,7 @@ ul {
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    background-image: url('../../../../assets/bg/header.jpg');
+    background-image: url("../../../../assets/bg/header.jpg");
     // height:240px;
     background-repeat: no-repeat;
     background-position: center;
@@ -94,7 +99,7 @@ ul {
       font-weight: 300;
       margin-right: 224px;
       text-align: center;
-      color:#fff;
+      color: #fff;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       padding-top: 18px;

@@ -1,6 +1,7 @@
 <ng-container *ngIf="store.cart$ | async as cart">
   <div *ngIf="cart.shoppingList.length > 0" class="cart-wrap">
-    <div class="cart">
+    <div class="backdrop"></div>
+    <div [class.success-wrap]="tabs[3].active" class="cart">
       <span class="rect"></span>
       <ul class="tabs">
         <ng-container *ngFor="let tab of tabs; let i = index">
@@ -15,141 +16,213 @@
           </li>
         </ng-container>
       </ul>
-      <div *ngIf="tabs[0].active" class="shopping-list">
-        <div class="product" *ngFor="let s of cart.shoppingList">
-          <div class="details">
-            <p>
-              {{s.name}}
-            </p>
-            <p>
-              {{s.price}}
-            </p>
-            <p>
-              {{s.billing}}
-            </p>
-          </div>
-          <ul class="options">
-            <li>
-              <span class="right">
-                מנוי דוח יומי
-                <span>
-                  5 דוחות
+      <!-- <div *ngIf="tabs[0].active" class="shopping-list">
+  
+      </div> -->
+
+
+      <div class="scroller">
+
+        <div class="shopping-list" *ngIf="tabs[0].active">
+          <div class="product" *ngFor="let s of cart.shoppingList">
+            <div class="details">
+              <p>
+                {{s.name}}
+              </p>
+              <p>
+                {{s.price}}
+              </p>
+              <p>
+                {{s.billing}}
+              </p>
+            </div>
+            <ul class="options">
+              <li>
+                <span class="right">
+                  מנוי דוח יומי
+                  <span>
+                    5 דוחות
+                  </span>
+
                 </span>
+                <span class="left">
+                  בחירת דוחות
+                  <img src="assets/icons/arrow.svg">
+                </span>
+              </li>
+              <li>
+                <span class="right">
+                  שירותי API
+                  <span>{{cart.shoppingList[0].options[1].description}}</span>
+                </span>
+                <span class="left">
+                  בחירת שירותים
+                  <img src="assets/icons/arrow.svg">
+                </span>
+              </li>
+            </ul>
+          </div>
 
-              </span>
-              <span class="left">
-                בחירת דוחות
-                <img src="assets/icons/arrow.svg">
-              </span>
-            </li>
-            <li>
-              <span class="right">
-                שירותי API
-                <span>{{cart.shoppingList[0].options[1].description}}</span>
-              </span>
-              <span class="left">
-                בחירת שירותים
-                <img src="assets/icons/arrow.svg">
-              </span>
-            </li>
-          </ul>
         </div>
-      </div>
 
 
-      <div *ngIf="tabs[1].active" class="user-details">
-        <form>
-          <fieldset>
-            <legend>פרטי משתמש</legend>
-            <div class="control">
-              <input placeholder="דואר אלקטרוני" type="text">
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>כתובת לחיוב</legend>
-            <div class="control">
-              <input placeholder="שם מלא / שם החברה" type="text">
-            </div>
-            <div class="control multi">
-              <input placeholder="רחוב" type="text">
-              <input placeholder="מספר" type="text">
-            </div>
-            <div class="control">
-              <input placeholder="עיר" type="text">
-            </div>
-          </fieldset>
-        </form>
+        <div *ngIf="tabs[1].active" class="user-details">
+          <form>
+            <fieldset>
+              <legend>פרטי משתמש</legend>
+              <div class="control">
+                <input name="email" [ngModel]="cart.userDetails.email" placeholder="דואר אלקטרוני" type="text">
+              </div>
+              <p (click)="showLogin(true)">
+                יש לך חשבון? <span>התחברות למערכת</span>
+              </p>
+            </fieldset>
+            <fieldset>
+              <legend>כתובת לחיוב</legend>
+              <div class="control">
+                <input name="fullName" [ngModel]="cart.userDetails.fullName" placeholder="שם מלא / שם החברה"
+                  type="text">
+              </div>
+              <div class="control multi">
+                <input name="streetName" [ngModel]="cart.userDetails.streetName" placeholder="רחוב" type="text">
+                <input name="streetNumber" [ngModel]="cart.userDetails.streetNumber" placeholder="מספר" type="text">
+              </div>
+              <div class="control">
+                <input name="city" [ngModel]="cart.userDetails.city" placeholder="עיר" type="text">
+              </div>
+            </fieldset>
+          </form>
 
-      </div>
 
-      <div *ngIf="tabs[2].active" class="payment-details">
 
-        <form>
-          <div class="card-header active">
-            <div class="right">
-              <label class="radio-container">כרטיס אשראי
-                <input [checked]="true" type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-              </label>
+        </div>
+        <div *ngIf="tabs[2].active" class="payment-details">
+
+          <form>
+            <div class="card-header active">
+              <div class="right">
+                <label class="radio-container">כרטיס אשראי
+                  <input [checked]="true" type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="left"></div>
             </div>
-            <div class="left"></div>
-          </div>
-          <fieldset>
-            <legend>תשלום במערכת המאובטחת שלנו</legend>
-            <div class="control">
-              <input placeholder="מספר כרטיס" type="text">
-            </div>
-            <div class="control">
-              <input placeholder="שם בעל הכרטיס" type="text">
-            </div>
-            <div class="control multi">
-              <input placeholder="תוקף" type="text">
-              <input placeholder="3 ספרות בגב הכרטיס" type="text">
-            </div>
-          </fieldset>
-          <div class="card-header">
-            <div class="right">
-              <label class="radio-container">
+            <fieldset>
+              <legend>תשלום במערכת המאובטחת שלנו</legend>
+              <div class="control">
+                <input placeholder="מספר כרטיס" type="text">
+              </div>
+              <div class="control">
+                <input placeholder="שם בעל הכרטיס" type="text">
+              </div>
+              <div class="control multi">
+                <input placeholder="תוקף" type="text">
+                <input placeholder="3 ספרות בגב הכרטיס" type="text">
+              </div>
+            </fieldset>
+            <div class="card-header">
+              <div class="right">
+                <label class="radio-container">
                   <img src="assets/icons/paypal.svg">
-                <input type="checkbox"  [checked]="false"  checked="checked">
-                <span class="checkmark"></span>
-              </label>
+                  <input type="checkbox" [checked]="false" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
 
+              </div>
+              <div class="left"></div>
             </div>
-            <div class="left"></div>
-          </div>
-          <div class="card-header">
-            <div class="right">
-              <label class="radio-container">
+            <div class="card-header">
+              <div class="right">
+                <label class="radio-container">
                   <img src="assets/icons/applepay.svg">
-                <input type="checkbox"  [checked]="false"  checked="checked">
-                <span class="checkmark"></span>
-              </label>
+                  <input type="checkbox" [checked]="false" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
 
+              </div>
+              <div class="left"></div>
             </div>
-            <div class="left"></div>
-          </div>
-        </form>
+          </form>
+
+        </div>
+
+
+        <ul class="additional-list details" *ngIf="tabs[2].active">
+          <li>
+            <span>דואר אלקטרוני</span>
+            <span>
+              noamd@gmail.com
+            </span>
+          </li>
+          <li>
+            <span>כתובת לחיוב</span>
+            <span>
+              נעם נדגני, דרך הבשמים 4, גני תקווה
+            </span>
+          </li>
+
+        </ul>
+
+        <p class="success-msg" *ngIf="tabs[3].active">
+          היכנס לאזור האישי על מנת לבצע התאמות במוצר שרכשת <br>
+          ו/או לעקוב אחרי ניצול השימוש
+        </p>
+
+        <ul class="additional-list" [style.margin-top]="tabs[1].active? 'auto' : '0'" *ngIf="tabs[1].active || tabs[2].active || tabs[3].active">
+          <li>
+            <span>קורס ניהול תיקי השקעות</span>
+            <span>
+              ₪5146
+            </span>
+          </li>
+          <li>
+            <span>מדדים אונליין</span>
+            <span>
+              ₪348
+            </span>
+          </li>
+          <li>
+            <span>חבילת הדוחות</span>
+            <span>
+              Pay as you go
+            </span>
+          </li>
+          <li>
+            <span>חבילת Premium</span>
+            <span>
+              ₪{{cart.shoppingList[0].price}}
+            </span>
+          </li>
+          <li class="list-sum" *ngIf="tabs[3].active">
+            <span>חבילת Premium</span>
+            <span>
+              ₪{{cart.shoppingList[0].price}}
+            </span>
+          </li>
+
+        </ul>
+
+        <div *ngIf="tabs[3].active" class="success">
+          <img src="assets/icons/cog.png">
+          <p>רוצה שירותי API נוספים?</p>
+          <p>שדרג לחבילת Unlimited <br> וקבל מוצרי API נוספים <br> במחיר משתלם</p>
+          <button class="action-btn">
+            שדרג חבילה עכשיו
+          </button>
+        </div>
 
       </div>
-
 
       <div class="sum">
-
-        <div class="premium" *ngIf="tabs[1].active">
-          <span>חבילת Premium</span>
-          <span>
-            {{cart.shoppingList[0].price}}
-          </span>
-        </div>
-
-        <div class="price">
+        <div *ngIf="!tabs[3].active" class="price">
           <span>סיכום</span>
           <span>
-            {{cart.shoppingList[0].price}}
+            ₪{{cart.shoppingList[0].price}}
           </span>
         </div>
-        <button [class.outline]="tabs[3].active" (click)="next()">
+        <button class="action-btn" [class.outline]="tabs[3].active"
+          (click)="tabs[1].active && !logged ? showLogin(true) : next()">
           {{actionText}}
         </button>
       </div>

@@ -1,5 +1,6 @@
 <app-header></app-header>
-<app-cart></app-cart>
+<app-cart (openLogin)="showLogin = $event; logged = !$event" #cart [logged]="logged"></app-cart>
+<app-login *ngIf="showLogin && !logged" (login)="logged = $event; cart.next()"></app-login>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
