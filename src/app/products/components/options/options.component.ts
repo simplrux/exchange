@@ -22,7 +22,7 @@ export class OptionsComponent implements OnInit {
     }]
   };
 
-  showServices = false;
+  showServices = true;
   services = ['מדדים נתוני בסיס', 'פרמטרים ושקולות', 'מדדים אונליין', 'לוח הנפקות', 'תנועת כסף חכם', 'עסקאות בבורסה'];
   ngOnInit(): void {
   }

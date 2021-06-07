@@ -1,7 +1,7 @@
 <ng-container *ngIf="store.cart$ | async as cart">
-  <div *ngIf="cart.shoppingList.length > 0" class="cart-wrap">
-    <div class="backdrop"></div>
-    <div [class.success-wrap]="tabs[3].active" class="cart">
+  <div *ngIf="cart.shoppingList.length > 0 && !close" class="cart-wrap">
+    <div class="backdrop" (click)="closeCart()"></div>
+    <div [class.show]="reveal" [class.success-wrap]="tabs[3].active" class="cart">
       <span class="rect"></span>
       <ul class="tabs">
         <ng-container *ngFor="let tab of tabs; let i = index">
@@ -16,10 +16,6 @@
           </li>
         </ng-container>
       </ul>
-      <!-- <div *ngIf="tabs[0].active" class="shopping-list">
-  
-      </div> -->
-
 
       <div class="scroller">
 
@@ -169,7 +165,8 @@
           ו/או לעקוב אחרי ניצול השימוש
         </p>
 
-        <ul class="additional-list" [style.margin-top]="tabs[1].active? 'auto' : '0'" *ngIf="tabs[1].active || tabs[2].active || tabs[3].active">
+        <ul class="additional-list" [style.margin-top]="tabs[1].active? 'auto' : '0'"
+          *ngIf="tabs[1].active || tabs[2].active || tabs[3].active">
           <li>
             <span>קורס ניהול תיקי השקעות</span>
             <span>

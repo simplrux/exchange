@@ -17,16 +17,31 @@
     <form>
       <fieldset>
         <div class="legend">
-          מנוי דוח BI יומי
-          <p>5 דוחות</p>
+          <div class="right">
+            שירותים API
+            <p>4/4 שירותים בחבילה</p>
+          </div>
+          <div class="left">
+            בחירת שירותים
+            <img src="../../../../assets/icons/arrow.svg">
+
+          </div>
+      
         </div>
       </fieldset>
     </form>
     <form [class.open]="showServices">
       <fieldset>
-        <div class="legend" (click)="showServices = !showServices">
-          שירותי API
-          <p>{{services.length}} שירותים</p>
+        <div class="legend" >
+          <div class="right">
+            שירותי API
+            <p>{{services.length}} שירותים</p>
+          </div>
+          <div (click)="showServices = !showServices" class="left">
+            בחירת דוחות
+            <img [class.rotate]="showServices" src="../../../../assets/icons/arrow.svg">
+          </div>
+        
         </div>
         <div id="cb">
           <label *ngFor="let s of services" class="cb-container">

@@ -28,9 +28,11 @@
         justify-content: center;
         cursor: pointer;
         flex: 1;
+        font-size: 14px;
         &.active {
           background: #ffffff;
           color: #0a3e76;
+          font-weight: 600;
         }
       }
     }
@@ -69,6 +71,46 @@
         background-color: #fff;
         border: 1px solid #0a3e76;
         color: #0a3e76;
+      }
+    }
+    p {
+      margin: 0;
+      position: relative;
+      text-align: center;
+      margin-top: 24px;
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 11px;
+        height: 1px;
+        width: 100%;
+        content: "";
+        background: #e5e5e5;
+        z-index: 0;
+      }
+      span {
+        color: #6e757d;
+        position: relative;
+        z-index: 1;
+        padding: 0 5px;
+        background-color: #fff;
+      }
+    }
+    .btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 18px;
+      button {
+        width: 127px;
+        height: 40px;
+        font-size: 14px;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          margin-right: 15px;
+        }
       }
     }
   }

@@ -14,9 +14,11 @@ export class CartComponent implements OnInit {
   @Output()
   openLogin: EventEmitter<boolean> = new EventEmitter();
 
+  close = false;
   @Input()
   logged = false;
 
+  reveal = false;
   actionText = 'מעבר לקופה';
   tabs = [
     {
@@ -38,6 +40,22 @@ export class CartComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    this.store.cart$.subscribe(cart => {
+      if (cart.shoppingList.length > 0) {
+        this.close = false;
+        setTimeout(() => {
+          this.reveal = true;
+          // sub.unsubscribe();
+        }, 300);
+      }
+    })
+  }
+
+  closeCart() {
+    this.reveal = false;
+    setTimeout(() => {
+      this.close = true;
+    }, 300);
   }
 
   next() {
@@ -52,8 +70,11 @@ export class CartComponent implements OnInit {
       this.tabs[currentIndex + 1].active = true;
       this.actionText = 'המשך לתשלום';
     } else {
-      this.tabs[0].active = true;
-      this.actionText = 'מעבר לקופה';
+      setTimeout(() => {
+        this.tabs[0].active = true;
+        this.actionText = 'מעבר לקופה';
+      }, 300);
+
     }
     if (currentIndex + 1 === 3) {
       this.actionText = 'בחזרה לחנות';
@@ -61,13 +82,17 @@ export class CartComponent implements OnInit {
       this.showLogin(false);
     }
     if (currentIndex + 1 === 4) {
-      this.store.cart$.next(
-        {
-          ...this.store.cart$.value, ...{
-            shoppingList: []
+      this.closeCart();
+      setTimeout(() => {
+        this.store.cart$.next(
+          {
+            ...this.store.cart$.value, ...{
+              shoppingList: []
+            }
           }
-        }
-      )
+        )
+      }, 300);
+
     }
   }
 

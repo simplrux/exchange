@@ -6,15 +6,31 @@
     </ul>
     <form>
       <div class="control">
-        <input placeholder="מספר כרטיס" type="text">
+        <input placeholder="הזן דואל" type="text">
       </div>
       <div class="control">
-        <input placeholder="שם בעל הכרטיס" type="text">
+        <input placeholder="סיסמה" type="text">
       </div>
       <button (click)="submitLogin()">
         התחברות
-    </button>
+      </button>
+      <p>
+        <span>
+          התחברות באמצעות
+        </span>
+      </p>
+      <div class="btns">
+        <button class="action-btn outline">
+          Facebook
+          <img src="assets/icons/fb.png">
+
+        </button>
+        <button class="action-btn outline">
+          Google
+          <img src="assets/icons/google.png">
+        </button>
+      </div>
     </form>
-   
+
   </div>
 </div>
