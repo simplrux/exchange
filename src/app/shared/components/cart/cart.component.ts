@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Cart } from '../../models/models.model';
 import { StoreService } from '../../services/store/store.service';
+import { confetti } from 'dom-confetti';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,10 @@ export class CartComponent implements OnInit {
   @Output()
   openLogin: EventEmitter<boolean> = new EventEmitter();
 
+
+  @Input()
   close = false;
+
   @Input()
   logged = false;
 
@@ -51,6 +55,14 @@ export class CartComponent implements OnInit {
     })
   }
 
+
+  confetti(button: HTMLElement) {
+    confetti(button);
+    setTimeout(() => {
+      confetti(button);
+    }, 600);
+  }
+
   closeCart() {
     this.reveal = false;
     setTimeout(() => {
@@ -58,7 +70,7 @@ export class CartComponent implements OnInit {
     }, 300);
   }
 
-  next() {
+  next(element?: HTMLElement) {
     let currentIndex = 0;
     this.tabs.forEach((tab, index) => {
       if (tab.active) {
@@ -80,6 +92,9 @@ export class CartComponent implements OnInit {
       this.actionText = 'בחזרה לחנות';
       this.logged = false;
       this.showLogin(false);
+      if (element) {
+        this.confetti(element);
+      }
     }
     if (currentIndex + 1 === 4) {
       this.closeCart();

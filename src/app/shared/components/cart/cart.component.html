@@ -211,7 +211,7 @@
 
       </div>
 
-      <div class="sum">
+      <div #element class="sum">
         <div *ngIf="!tabs[3].active" class="price">
           <span>סיכום</span>
           <span>
@@ -219,7 +219,7 @@
           </span>
         </div>
         <button class="action-btn" [class.outline]="tabs[3].active"
-          (click)="tabs[1].active && !logged ? showLogin(true) : next()">
+          (click)="tabs[1].active && !logged ? showLogin(true) : next(element)">
           {{actionText}}
         </button>
       </div>

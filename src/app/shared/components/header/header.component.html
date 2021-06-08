@@ -5,7 +5,8 @@
   <li class="option" *ngFor="let option of navList.categories; let i = index">
     {{option}}
   </li>
-  <li class="icon" *ngFor="let icon of navList.icons; let id = index"  [class]="icon" [class.divider]="id === 0 || id === 1">
+  <li class="icon" (click)="showCart()" *ngFor="let icon of navList.icons; let id = index" [class]="icon"
+    [class.divider]="id === 0 || id === 1">
     <span class="icon-inner">
 
       <img [src]="'assets/icons/' + icon + '.svg'">
@@ -16,10 +17,10 @@
   </li>
 </ul>
 <div class="header">
-    <div class="content">
-        <div class="blue-tile">
-            ברוכים הבאים לחנות הבורסה
-        </div>
+  <div class="content">
+    <div class="blue-tile">
+      ברוכים הבאים לחנות הבורסה
     </div>
-    <!-- <img class="header-img" src="assets/bg/header.jpg"> -->
+  </div>
+  <!-- <img class="header-img" src="assets/bg/header.jpg"> -->
 </div>
