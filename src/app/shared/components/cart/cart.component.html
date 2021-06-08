@@ -17,7 +17,7 @@
         </ng-container>
       </ul>
 
-      <div class="scroller">
+      <div class="scroller" #scroller>
 
         <div class="shopping-list" *ngIf="tabs[0].active">
           <div class="product" *ngFor="let s of cart.shoppingList">

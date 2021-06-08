@@ -59,14 +59,23 @@ export class CartComponent implements OnInit {
   confetti(button: HTMLElement) {
     confetti(button);
     setTimeout(() => {
-      confetti(button);
+      confetti(button, {
+        spread: 180,
+        duration: 5000
+      });
     }, 600);
   }
 
   closeCart() {
     this.reveal = false;
+    this.tabs.forEach((tab, index) => {
+      if (tab.active) {
+        tab.active = false;
+      }
+    });
     setTimeout(() => {
       this.close = true;
+      this.tabs[0].active = true;
     }, 300);
   }
 
