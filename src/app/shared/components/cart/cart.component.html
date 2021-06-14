@@ -18,7 +18,6 @@
       </ul>
 
       <div class="scroller" #scroller>
-
         <div class="shopping-list" *ngIf="tabs[0].active">
           <div class="product" *ngFor="let s of cart.shoppingList">
             <div class="details">
@@ -39,7 +38,6 @@
                   <span>
                     5 דוחות
                   </span>
-
                 </span>
                 <span class="left">
                   בחירת דוחות
@@ -58,9 +56,7 @@
               </li>
             </ul>
           </div>
-
         </div>
-
 
         <div *ngIf="tabs[1].active" class="user-details">
           <form>
@@ -77,15 +73,15 @@
             <fieldset>
               <legend>כתובת לחיוב</legend>
               <div class="control">
-                <input name="fullName" [ngModel]="cart.userDetails.fullName" placeholder="שם מלא / שם החברה"
+                <input name="fullName" [(ngModel)]="cart.userDetails.fullName" placeholder="שם מלא / שם החברה"
                   type="text">
               </div>
               <div class="control multi">
-                <input name="streetName" [ngModel]="cart.userDetails.streetName" placeholder="רחוב" type="text">
-                <input name="streetNumber" [ngModel]="cart.userDetails.streetNumber" placeholder="מספר" type="text">
+                <input name="streetName" [(ngModel)]="cart.userDetails.streetName" placeholder="רחוב" type="text">
+                <input name="streetNumber" [(ngModel)]="cart.userDetails.streetNumber" placeholder="מספר" type="text">
               </div>
               <div class="control">
-                <input name="city" [ngModel]="cart.userDetails.city" placeholder="עיר" type="text">
+                <input name="city" [(ngModel)]="cart.userDetails.city" placeholder="עיר" type="text">
               </div>
             </fieldset>
           </form>
@@ -94,7 +90,6 @@
 
         </div>
         <div *ngIf="tabs[2].active" class="payment-details">
-
           <form>
             <div class="card-header active">
               <div class="right">
@@ -125,7 +120,6 @@
                   <input type="checkbox" [checked]="false" checked="checked">
                   <span class="checkmark"></span>
                 </label>
-
               </div>
               <div class="left"></div>
             </div>
@@ -136,14 +130,11 @@
                   <input type="checkbox" [checked]="false" checked="checked">
                   <span class="checkmark"></span>
                 </label>
-
               </div>
               <div class="left"></div>
             </div>
           </form>
-
         </div>
-
 
         <ul class="additional-list details" *ngIf="tabs[2].active">
           <li>
@@ -155,10 +146,10 @@
           <li>
             <span>כתובת לחיוב</span>
             <span>
-              נעם דגני, דרך הבשמים 4, גני תקווה
+              {{cart.userDetails.fullName}}, {{cart.userDetails.streetName}} {{cart.userDetails.streetNumber}},
+              {{cart.userDetails.city}}
             </span>
           </li>
-
         </ul>
 
         <p class="success-msg" *ngIf="tabs[3].active">
@@ -166,63 +157,29 @@
           ו/או לעקוב אחרי ניצול השימוש
         </p>
 
-        <!-- <ul class="additional-list" [style.margin-top]="tabs[1].active? 'auto' : '0'"
-          *ngIf="tabs[1].active || tabs[2].active || tabs[3].active">
-          <li>
-            <span>קורס ניהול תיקי השקעות</span>
-            <span>
-              ₪5146
-            </span>
-          </li>
-          <li>
-            <span>מדדים אונליין</span>
-            <span>
-              ₪348
-            </span>
-          </li>
-          <li>
-            <span>חבילת הדוחות</span>
-            <span>
-              Pay as you go
-            </span>
-          </li>
-          <li>
-            <span>חבילת Premium</span>
-            <span>
-              ₪{{cart.shoppingList[0].price}}
-            </span>
-          </li>
-          <li class="list-sum" *ngIf="tabs[3].active">
-            <span>חבילת Premium</span>
-            <span>
-              ₪{{cart.shoppingList[0].price}}
-            </span>
-          </li>
-        </ul> -->
-
-
-        <!-- {{cart.shoppingList | json}} -->
-
         <ul class="additional-list" *ngIf="tabs[1].active || tabs[2].active || tabs[3].active"
           [style.margin-top]="tabs[1].active? 'auto' : '0'">
           <ng-container>
             <li *ngFor="let p of cart.shoppingList">
               <span>{{p.name}}</span>
               <span>
-                ₪{{p.price - round(calcPrice(cart.shoppingList) * .17)}}
+                ₪{{p.price - round(p.price * .17)}}
               </span>
             </li>
           </ng-container>
-
           <li class="vat">
             <span>מע"מ (תושב ישראל)</span>
             <span>
               ₪{{round(calcPrice(cart.shoppingList) * .17)}}
             </span>
           </li>
-
+          <li class="list-sum" *ngIf="tabs[3].active">
+            <span>סיכום</span>
+            <span>
+              ₪{{calcPrice(cart.shoppingList)}}
+            </span>
+          </li>
         </ul>
-
 
         <div *ngIf="tabs[3].active" class="success">
           <img src="assets/icons/cog.png">
@@ -232,7 +189,6 @@
             שדרג חבילה עכשיו
           </button>
         </div>
-
       </div>
 
       <div #element class="sum">

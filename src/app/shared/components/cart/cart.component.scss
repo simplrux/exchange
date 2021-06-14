@@ -266,22 +266,22 @@ ul {
           color: #434343;
         }
       }
-      // &.list-sum {
-      //   border-top: 1px solid #f1f1f1;
-      //   background: #fbfbfb;
+      &.list-sum {
+        border-top: 1px solid #f1f1f1;
+        background: #fbfbfb;
 
-      //   &::after {
-      //     content: none;
-      //     display: none;
-      //   }
-      //   span:first-of-type {
-      //     color: $darkblue;
-      //   }
-      //   span:last-of-type {
-      //     font-size: 18px;
-      //     font-weight: 700;
-      //   }
-      // }
+        &::after {
+          content: none;
+          display: none;
+        }
+        span:first-of-type {
+          color: $darkblue;
+        }
+        span:last-of-type {
+          font-size: 18px;
+          font-weight: 700;
+        }
+      }
     }
     li:last-of-type {
       &::after {

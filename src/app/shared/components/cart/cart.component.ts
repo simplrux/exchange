@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { Cart } from '../../models/models.model';
 import { StoreService } from '../../services/store/store.service';
 import { confetti } from 'dom-confetti';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -46,6 +48,8 @@ export class CartComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+
+  this.store.getPackages();
     this.store.cart$.subscribe(cart => {
       if (cart.shoppingList.length > 0) {
         this.close = false;
@@ -54,7 +58,7 @@ export class CartComponent implements OnInit {
           // sub.unsubscribe();
         }, 300);
       }
-    })
+    });
   }
 
 

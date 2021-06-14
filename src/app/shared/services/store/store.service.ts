@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Cart, Package, Product } from '../../models/models.model';
@@ -71,9 +72,16 @@ export class StoreService {
     }
   }
 
+  getPackages() {
+    this.http.get('http://localhost:1337/Packages').subscribe((p: any) => {
+      this.packages = p;
+      this.packages$.next(this.packages);
+    });
+  }
+
   packages$: BehaviorSubject<Package[]> = new BehaviorSubject(this.packages);
   productList$: BehaviorSubject<Product[]> = new BehaviorSubject(this.productList);
   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.cart);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 }
