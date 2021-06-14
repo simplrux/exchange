@@ -11,12 +11,18 @@ export class LoginComponent implements OnInit {
 
   @Output()
   login: EventEmitter<boolean> = new EventEmitter();
-
+  @Output()
+  email: EventEmitter<string> = new EventEmitter();
+  disable = true;
   ngOnInit(): void {
   }
 
-  submitLogin() {
-    this.login.emit(true);
+  submitLogin(email: string) {
+    if (email) {
+      this.login.emit(true);
+      this.email.emit(email);
+    }
+
   }
 
 }

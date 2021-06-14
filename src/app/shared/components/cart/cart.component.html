@@ -67,7 +67,8 @@
             <fieldset>
               <legend>פרטי משתמש</legend>
               <div class="control">
-                <input name="email" [ngModel]="cart.userDetails.email" placeholder="דואר אלקטרוני" type="text">
+                <input name="email" [value]="email" [ngModel]="cart.userDetails.email" placeholder="דואר אלקטרוני"
+                  type="text">
               </div>
               <p (click)="showLogin(true)">
                 יש לך חשבון? <span>התחברות למערכת</span>
@@ -148,13 +149,13 @@
           <li>
             <span>דואר אלקטרוני</span>
             <span>
-              noamd@gmail.com
+              {{email}}
             </span>
           </li>
           <li>
             <span>כתובת לחיוב</span>
             <span>
-              נעם נדגני, דרך הבשמים 4, גני תקווה
+              נעם דגני, דרך הבשמים 4, גני תקווה
             </span>
           </li>
 
@@ -165,7 +166,7 @@
           ו/או לעקוב אחרי ניצול השימוש
         </p>
 
-        <ul class="additional-list" [style.margin-top]="tabs[1].active? 'auto' : '0'"
+        <!-- <ul class="additional-list" [style.margin-top]="tabs[1].active? 'auto' : '0'"
           *ngIf="tabs[1].active || tabs[2].active || tabs[3].active">
           <li>
             <span>קורס ניהול תיקי השקעות</span>
@@ -197,8 +198,31 @@
               ₪{{cart.shoppingList[0].price}}
             </span>
           </li>
+        </ul> -->
+
+
+        <!-- {{cart.shoppingList | json}} -->
+
+        <ul class="additional-list" *ngIf="tabs[1].active || tabs[2].active || tabs[3].active"
+          [style.margin-top]="tabs[1].active? 'auto' : '0'">
+          <ng-container>
+            <li *ngFor="let p of cart.shoppingList">
+              <span>{{p.name}}</span>
+              <span>
+                ₪{{p.price - round(calcPrice(cart.shoppingList) * .17)}}
+              </span>
+            </li>
+          </ng-container>
+
+          <li class="vat">
+            <span>מע"מ (תושב ישראל)</span>
+            <span>
+              ₪{{round(calcPrice(cart.shoppingList) * .17)}}
+            </span>
+          </li>
 
         </ul>
+
 
         <div *ngIf="tabs[3].active" class="success">
           <img src="assets/icons/cog.png">
@@ -214,8 +238,12 @@
       <div #element class="sum">
         <div *ngIf="!tabs[3].active" class="price">
           <span>סיכום</span>
+          <span><label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label></span>
           <span>
-            ₪{{cart.shoppingList[0].price}}
+            ₪{{calcPrice(cart.shoppingList) }}
           </span>
         </div>
         <button class="action-btn" [class.outline]="tabs[3].active"

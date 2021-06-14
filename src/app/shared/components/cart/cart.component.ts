@@ -18,6 +18,8 @@ export class CartComponent implements OnInit {
 
   @Input()
   close = false;
+  @Input()
+  email = '';
 
   @Input()
   logged = false;
@@ -68,6 +70,7 @@ export class CartComponent implements OnInit {
 
   closeCart() {
     this.reveal = false;
+    this.email = '';
     this.tabs.forEach((tab, index) => {
       if (tab.active) {
         tab.active = false;
@@ -79,6 +82,18 @@ export class CartComponent implements OnInit {
     }, 300);
   }
 
+  calcPrice(shoppingList: any[]) {
+    let sum = 0;
+    shoppingList.forEach(product => {
+      if (product.price !== 'חינם') {
+        sum += Number(product.price);
+      }
+    });
+    return sum;
+  }
+  round(num: number) {
+    return Math.round(num);
+  }
   next(element?: HTMLElement) {
     let currentIndex = 0;
     this.tabs.forEach((tab, index) => {

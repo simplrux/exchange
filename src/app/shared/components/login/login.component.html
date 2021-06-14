@@ -6,12 +6,14 @@
     </ul>
     <form>
       <div class="control">
-        <input placeholder="הזן דואל" type="text">
+        <input (input)="disable = emailInput.value && passInput.value? false:true" #emailInput placeholder="הזן דואל"
+          type="email">
       </div>
       <div class="control">
-        <input placeholder="סיסמה" type="text">
+        <input (input)="disable = emailInput.value && passInput.value? false:true" #passInput placeholder="סיסמה"
+          type="password">
       </div>
-      <button (click)="submitLogin()">
+      <button [disabled]="disable" (click)="submitLogin(emailInput.value)">
         התחברות
       </button>
       <p>

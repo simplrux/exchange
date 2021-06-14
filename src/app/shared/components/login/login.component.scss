@@ -63,14 +63,17 @@
       border: 0;
       height: 48px;
       width: 100%;
-      border-radius: 6px;
-      color: #fff;
+      border-radius: 6px; 
+      color: #fff; 
       font-size: 20px;
       margin-top: 48px;
       &.outline {
         background-color: #fff;
         border: 1px solid #0a3e76;
         color: #0a3e76;
+      }
+      &:disabled {
+        background: rgb(211, 211, 211);
       }
     }
     p {
