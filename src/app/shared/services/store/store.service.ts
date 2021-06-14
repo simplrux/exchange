@@ -9,38 +9,39 @@ import { Cart, Package, Product } from '../../models/models.model';
 })
 export class StoreService {
 
-  packages: Package[] = [
-    {
-      name: 'חבילת בסיס', price: 'חינם', billing: 'לחודש', options: [
-        { name: 'סוכן חכם - התראות נתוני מסחר', description: '3 משתמשים', available: true },
-        { name: 'מוצרי API', description: '1 שירותים', available: true },
-        { name: 'נתוני מניות', available: false },
-        { name: 'הורדת קבצי מידע', available: false },
-        { name: 'מנוי דוח BI יומי', available: false },
-        { name: 'Graphical widget', available: false },
-      ]
-    },
-    {
-      name: 'חבילת Premium', price: '29', billing: 'לחודש', options: [
-        { name: 'סוכן חכם - התראות נתוני מסחר', description: '10 משתמשים', available: true },
-        { name: 'מוצרי API', description: '4 שירותים', available: true },
-        { name: 'נתוני מניות', available: true },
-        { name: 'הורדת קבצי מידע', available: true },
-        { name: 'מנוי דוח BI יומי', available: true },
-        { name: 'Graphical widget', available: false },
-      ]
-    },
-    {
-      name: 'חבילת Unlimited', price: '1000', billing: 'לחודש', options: [
-        { name: 'סוכן חכם - התראות נתוני מסחר', description: '50 משתמשים', available: true },
-        { name: 'מוצרי API', description: '40 שירותים', available: true },
-        { name: 'נתוני מניות', available: true },
-        { name: 'הורדת קבצי מידע', available: true },
-        { name: 'מנוי דוח BI יומי', available: true },
-        { name: 'Graphical widget', available: true },
-      ]
-    },
-  ];
+  packages: Package[] = [];
+  // packages: Package[] = [
+  //   {
+  //     name: 'חבילת בסיס', price: 'חינם', billing: 'לחודש', options: [
+  //       { name: 'סוכן חכם - התראות נתוני מסחר', description: '3 משתמשים', available: true },
+  //       { name: 'מוצרי API', description: '1 שירותים', available: true },
+  //       { name: 'נתוני מניות', available: false },
+  //       { name: 'הורדת קבצי מידע', available: false },
+  //       { name: 'מנוי דוח BI יומי', available: false },
+  //       { name: 'Graphical widget', available: false },
+  //     ]
+  //   },
+  //   {
+  //     name: 'חבילת Premium', price: '29', billing: 'לחודש', options: [
+  //       { name: 'סוכן חכם - התראות נתוני מסחר', description: '10 משתמשים', available: true },
+  //       { name: 'מוצרי API', description: '4 שירותים', available: true },
+  //       { name: 'נתוני מניות', available: true },
+  //       { name: 'הורדת קבצי מידע', available: true },
+  //       { name: 'מנוי דוח BI יומי', available: true },
+  //       { name: 'Graphical widget', available: false },
+  //     ]
+  //   },
+  //   {
+  //     name: 'חבילת Unlimited', price: '1000', billing: 'לחודש', options: [
+  //       { name: 'סוכן חכם - התראות נתוני מסחר', description: '50 משתמשים', available: true },
+  //       { name: 'מוצרי API', description: '40 שירותים', available: true },
+  //       { name: 'נתוני מניות', available: true },
+  //       { name: 'הורדת קבצי מידע', available: true },
+  //       { name: 'מנוי דוח BI יומי', available: true },
+  //       { name: 'Graphical widget', available: true },
+  //     ]
+  //   },
+  // ];
 
 
   productList: Product[] = [
@@ -75,6 +76,7 @@ export class StoreService {
   getPackages() {
     this.http.get('http://localhost:1337/Packages').subscribe((p: any) => {
       this.packages = p;
+      // console.log(this.packages);
       this.packages$.next(this.packages);
     });
   }
